@@ -2,6 +2,6 @@
 
 This REPO is for COURSE WORK from Encode Club BLOCKCHAIN Camp!
 
-Find each TASK NUMBERED in the FOLDERS above.
+Look in TASK Folder...
 
 ~ : )
