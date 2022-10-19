@@ -16,6 +16,8 @@ NOT SO INTERESTED IN MONEY, NOW CONSIDERING RETURNING SOME TOKENS OR JUST LEAVIN
 5. 0x814e6a21c8eb34b62a05c1d0b14ee932873c62ef3c8575dc49bcf12004714eda
 - 2021 160 ETH Exploit for 209,000. Not Blocked Polynetwork Exploit. Heist.
 2. What is the largest account balance you can find ?
+- TOP ACCOUNTS by ETH BALANCE:
+- 0x00000000219ab540356cbb839cbe05303d7705fa	Beacon Deposit Contract	14,321,831.00771856 Ether
 3. What is special about these accounts :
 1. 0x1db3439a222c519ab44bb1144fc28167b4fa6ee6
 2. 0x000000000000000000000000000000000000dEaD
