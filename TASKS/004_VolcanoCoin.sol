@@ -1,35 +1,41 @@
-// SPDX-License-Identifier: None
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.8.17;
 
 
 contract VolcanoCoin {
 
-    uint256 number;
-    //TODO  add variable address of deployer, and contructor setting it, and external function to
-    // return 0x00...dEaD. if called by deployer, else if not owner return deployers address.
-
-    address owner;
+    uint256 totalSupply = 10000;
+    uint256 constant tgt = 1000;
+    address immutable owner;
     address dead = 0x000000000000000000000000000000000000dEaD ;
 
     constructor() {
         owner = msg.sender;
     }
 
+    modifier onlyOwner {
+        _;
+    }
+
+    event totalSupplyChanged( uint256 );
+
     function testOwner() external view returns(address){
         if(msg.sender == owner){
-            return dead;
-        } else {
             return owner;
+        } else {
+            return dead;
         }
     }
 
-    function store(uint256 num) public {
-        number = num;
+    function setSupply() onlyOwner public {      
+        emit totalSupplyChanged(totalSupply+ tgt);
+        totalSupply += tgt;
+        // assert()
     }
 
 
-    function retrieve() public view returns (uint256){
-        return number;
+    function getTotalSupply() public view returns (uint256){
+        return totalSupply;
     }
 }
