@@ -5,14 +5,16 @@ pragma solidity 0.8.17;
 
 contract VolcanoCoin {
 
-    mapping (address => uint256 ) balances;
-    uint256 totalSupply = 10000;
+    //MAP DECLARATION
+    mapping (address => uint256 ) public balances; //TIP: automated get on map?
     uint256 constant tgt = 1000;
-    address immutable owner;
-    address dead = 0x000000000000000000000000000000000000dEaD ;
+    uint256 totalSupply = 10000;
+    address owner;                       //TIP: immutable? No!
+    // address dead = 0x000000000000000000000000000000000000dEaD ;
 
     constructor() {
         owner = msg.sender;
+        balances[msg.sender] = totalSupply;  //MAP EXECUTION
     }
 
     modifier onlyOwner {
@@ -22,12 +24,8 @@ contract VolcanoCoin {
 
     event totalSupplyChanged( uint256 );
 
-    function testOwner() external view returns(address){
-        if(msg.sender == owner){
-            return owner;
-        } else {
-            return dead;
-        }
+    function getOwner() external view returns(address){
+        return owner;
     }
 
     function setSupply() onlyOwner public { 
