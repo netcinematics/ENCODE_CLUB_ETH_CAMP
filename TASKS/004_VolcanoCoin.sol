@@ -14,15 +14,17 @@ contract VolcanoCoin {
 
     constructor() {
         owner = msg.sender;
-        balances[msg.sender] = totalSupply;  //MAP EXECUTION
+        balances[owner] = totalSupply;  //MAP EXECUTION
     }
 
     modifier onlyOwner {
-        // require(owner == msg.sender,”must be owner”);
+        require( (owner == msg.sender) , 'must be owner');
+        // revert('broke');
         _;
     }
 
     event totalSupplyChanged( uint256 );
+    event transferEvent( uint256, address );
 
     function getOwner() external view returns(address){
         return owner;
@@ -38,8 +40,14 @@ contract VolcanoCoin {
         }
     }
 
-
     function getTotalSupply() public view returns (uint256){
         return totalSupply;
     }
+
+    function transfer( uint256 _amt, address _toaddr) public {
+        //TIP: senders address is msg.sender
+        //TIP: senders address as parameter would be... send money to self?
+        emit transferEvent(_amt,_toaddr);
+    }
+
 }
