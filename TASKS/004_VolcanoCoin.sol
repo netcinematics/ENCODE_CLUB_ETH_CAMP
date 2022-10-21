@@ -5,6 +5,7 @@ pragma solidity 0.8.17;
 
 contract VolcanoCoin {
 
+    mapping (address => uint256 ) balances;
     uint256 totalSupply = 10000;
     uint256 constant tgt = 1000;
     address immutable owner;
@@ -15,6 +16,7 @@ contract VolcanoCoin {
     }
 
     modifier onlyOwner {
+        // require(owner == msg.sender,”must be owner”);
         _;
     }
 
@@ -28,10 +30,14 @@ contract VolcanoCoin {
         }
     }
 
-    function setSupply() onlyOwner public {      
-        emit totalSupplyChanged(totalSupply+ tgt);
+    function setSupply() onlyOwner public { 
+        uint256 checkNum = totalSupply + tgt;     
+        emit totalSupplyChanged(checkNum);
         totalSupply += tgt;
-        // assert()
+        assert(totalSupply!=checkNum);
+        if(totalSupply!=checkNum){ 
+            revert('Something wrong');
+        }
     }
 
 
