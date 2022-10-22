@@ -21,9 +21,9 @@ contract VolcanoCoin {
     }
 
     modifier onlyOwner {
+        console.log("CheckOwner");
+        require( (owner == msg.sender) , "ERROR: must be owner"); //REVERTS
         console.log("ONLYOWNER");
-        require( (owner == msg.sender) , 'must be owner');
-        // revert('broke');
         _;
     }
 
@@ -43,14 +43,14 @@ contract VolcanoCoin {
     }
 
     function setSupply() onlyOwner public {
-        console.log("SETSUPPLY"," should be only owner!"); 
-        uint256 checkNum = totalSupply + tgt;     
-        emit totalSupplyChanged(checkNum);
+        console.log("SETSUPPLY",totalSupply); 
+        console.log("TGT",tgt);
+        uint256 checkNum = totalSupply + tgt; 
+        console.log("TESTNum",checkNum);
         totalSupply += tgt;
-        assert(totalSupply!=checkNum);
-        if(totalSupply!=checkNum){ 
-            revert('Something wrong');
-        }
+        console.log("NewSupply", totalSupply);
+        assert(totalSupply==checkNum);
+        emit totalSupplyChanged(totalSupply);
     }
 
     function getTotalSupply() public view returns (uint256){
@@ -90,15 +90,15 @@ contract VolcanoCoin {
     //transfer: ERROR: PAY SELF, LOG and REVERT ? TRUE
     //transfer: PAY NEW ADDR 0xdead ? TRUE
     //transfer: PAY EXISTING 0xdead ? TRUE
-    //setSupply: ERROR: NON OWNER: assert/revert ?
-    //setSupply: EVENT: totalSupplyChanged ?
-    //setSupply: by OWNER: onlyOwner ?
+    //setSupply: ERROR: NON OWNER: assert/revert ? TRUE
+    //setSupply: EVENT: totalSupplyChanged ? TRUE
     //setPayments: from transfer
     //seePayments: fn
 
     //console.log: ? TRUE
     //event: ? TRUE
-    //require: ? FALSE
+    //modifier ? TRUE //onlyOwner
+    //require: ? TRUE //setSupply
     //revert: ? TRUE
     //assert: ? TRUE
     //customerror: ? FALSE
