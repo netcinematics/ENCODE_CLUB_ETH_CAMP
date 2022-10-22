@@ -23,6 +23,14 @@ contract VolcanoCoin {
         _;
     }
 
+    struct Payment {
+        uint256 amt;
+        address toaddr;
+    }
+
+    //TIP: map of user address to array of Payment structs
+    mapping (address => Payment) userPayments;
+
     event totalSupplyChanged( uint256 );
     event transferEvent( uint256, address );
 
