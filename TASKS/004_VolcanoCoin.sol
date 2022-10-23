@@ -7,10 +7,12 @@ import "hardhat/console.sol";
 contract VolcanoCoin {
 
     //MAP DECLARATION
-    mapping (address => uint256 ) public balances; //TIP: automated get on map?
+    address owner;                       //TIP: immutable? No!
     uint256 constant tgt = 1000;
     uint256 totalSupply = 10000;
-    address owner;                       //TIP: immutable? No!
+    mapping (address => uint256 ) public balances; //TIP: automated get on map?
+    mapping (uint256 => Payment) public payments; //TIP: mapping of PAYMENTS.
+    uint numPayments = 0;
     // address dead = 0x000000000000000000000000000000000000dEaD ;
 
     constructor() {
@@ -30,13 +32,13 @@ contract VolcanoCoin {
     struct Payment {
         uint256 amt;
         address toaddr;
+        address sender;
     }
-
-    //TIP: map of user address to array of Payment structs
-    mapping (address => Payment) public userPayments;
 
     event totalSupplyChanged( uint256 );
     event transferEvent( uint256, address );
+    // error NotEnoughFunds(uint amt, uint total);
+    error errorOverdraft(uint256 amt, uint256 ttl ); //DECLARATION
 
     function getOwner() external view returns(address){
         return owner;
@@ -63,8 +65,11 @@ contract VolcanoCoin {
         console.log("PRE SEND SELF check",_toaddr,msg.sender,_toaddr != msg.sender);
         assert(_toaddr != msg.sender); //ERROR: SEND TO SELF, auto error and revert.
         // console.log("PRE Overdraft")
-        // assert(_amt>totalSupply-_amt); //ERROR: OVERDRAWN SUPPLY
-        // Payment(_amt,_toaddr);
+        //TIP: CUSTOM ERROR errorOverdraft
+        if (totalSupply < _amt){ 
+            console.log("ERROR: OVERDRAFT");
+            revert errorOverdraft(_amt, totalSupply); 
+        }
         // address dead = 0x000000000000000000000000000000000000dEaD ;
         if(balances[_toaddr]>0){
             console.log("Pay Existing addr");
@@ -77,23 +82,25 @@ contract VolcanoCoin {
         }
 
         emit transferEvent(_amt,_toaddr);
+
+        //TIP: Update Struct... tricky
+        payments[++numPayments] = Payment({amt: _amt, toaddr: _toaddr, sender: msg.sender});
     }
 
-    // function seePayments() public view returns (Payment){
-    //     return Payment;
-    // }
 
     //TEST-SCRIPT:
     //getTotalSupply = 10,000 ? TRUE
     //getOwner = 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2 ? TRUE
     //balances: mapping to address = 10,000 ? TRUE
     //transfer: ERROR: PAY SELF, LOG and REVERT ? TRUE
+    //transfer: ERROR: overdraft ? TRUE
     //transfer: PAY NEW ADDR 0xdead ? TRUE
     //transfer: PAY EXISTING 0xdead ? TRUE
     //setSupply: ERROR: NON OWNER: assert/revert ? TRUE
     //setSupply: EVENT: totalSupplyChanged ? TRUE
-    //setPayments: from transfer
-    //seePayments: fn
+    //setPayments: from transfer ? TRUE
+    //seePayments: public ? TRUE
+
 
     //console.log: ? TRUE
     //event: ? TRUE
@@ -101,8 +108,11 @@ contract VolcanoCoin {
     //require: ? TRUE //setSupply
     //revert: ? TRUE
     //assert: ? TRUE
-    //customerror: ? FALSE
+    //customerror: ? TRUE: not enough funds
 
-    //SEARCH for EXAMPLES of this in DOCS... (after struggle) : )
+// TRICKY SYNTAX TO INIT A STRUCT
+// Funder(msg.sender, msg.value) to initialise.
+//         c.funders[c.numFunders++] = Funder({addr: msg.sender, amount: msg.value});
+
 
 }
