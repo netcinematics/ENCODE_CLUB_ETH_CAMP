@@ -3,19 +3,16 @@
 INSTRUCTIONS: 
 
 1. We made a payment mapping, but we havenʼt added all the functionality for it yet.
-Write a function to view the payment records, specifying the user as an input.
-What is the difference between doing this and making the mapping public ?
+a. Write a function to view the payment records, specifying the user as an input.
+b. What is the difference between doing this and making the mapping public ?
 
+2. For the payments record mapping, 
+c. create a function called recordPayment that takes senderAdd, ReceiverAdd, AMT, 
 
-2. For the payments record mapping, create a function called recordPayment that
-takes
-senderAdd, ReceiverAdd, AMT, 
+- AMT: as an input, then 
 
-- AMT: as an input, then creates a new payment record and adds the new record to the
-userʼs payment record.
-
-3. Each time we make a transfer of tokens, we should call the this recordPayment
-function to record the transfer
+3. Each time we make a transfer of tokens, 
+d. we should call the this recordPayment function to record the transfer
 
 //PASTE INTO REMIX...
 \**************************************/
@@ -32,7 +29,7 @@ contract VolcanoCoin is Ownable {
     mapping (address => uint256 ) public balances; //TIP: automated get on map?
     // mapping (uint256 => Payment) public payments; //TIP: mapping of PAYMENTS.
     mapping(address => Payment[]) public payments;
-    uint numPayments = 0; //AUDIT: what does this do?
+    // uint numPayments = 0; //AUDIT: what does this do?
     // address dead = 0x000000000000000000000000000000000000dEaD ;
 
     constructor() {
@@ -43,7 +40,7 @@ contract VolcanoCoin is Ownable {
 
     struct Payment {
         uint256 amt;
-        address toaddr;
+        address receiver;
         address sender;
     }
 
@@ -105,17 +102,21 @@ contract VolcanoCoin is Ownable {
         console.log("Record PMT", _amt);
         //creates a new payment record and adds the new record to the userʼs payment record.       
         payments[_sender].push(Payment(_amt, _receiver, _sender));
+        // console.log("RECORD ADD",payments[_sender]);
         // payments[++numPayments] = Payment({amt: _amt, toaddr: _toaddr, sender: msg.sender});
         emit pmtRecordUpdate(payments[_sender]);
 
     }
 
     //TEST-SCRIPT
-    //Transfer acct 2 ? TRUE
-    //Transfer acct 3 ? TRUE
+    //Transfer acct 1-2 ? TRUE
+    //Transfer acct 2-3 ? TRUE
     //TEST: transfer    ? calls recordPayment ? TRUE
     //TEST: recordPmt   ? adds new payment added to user ? TRUE
-    //TEST: viewPmtRecs ? shows payments by user 2,3 ? FALSE
+    //TEST: viewPmtRecs ? shows payments by SENDER 2,3 ? TRUE
+
+    //tuple(uint256,address,address)[]: 
+    //400,0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2,0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
 
     //TEST-SCRIPT:
     //getTotalSupply = 10,000 ? TRUE
