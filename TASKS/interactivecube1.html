@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>INTERACTIVE TEST</title>
+    <style>
+        body { background-color:black; color:steelblue; }
+        .hidden { visibility: none; display:none;}
+    </style>
+</head>
+<body>
+    <h1>hullo NFTyClick!</h1>
+    <article>
+        <section id="section1">section1</section>
+        <section id="section2" class="hidden">section2</section>
+        <section id="section3" class="hidden">section3</section>
+        <section id="section4" class="hidden">section4</section>
+        <button onclick="NFTClickable();">NEXT...</button>
+    </article>
+</body>
+<script>
+    let el1 = document.getElementById('section1');
+    let el2 = document.getElementById('section2');
+    let el3 = document.getElementById('section3');
+    let el4 = document.getElementById('section4');
+    let idx = 1;
+
+    function NFTClickable(){
+        //HIDE all btns
+        el1.classList.add('hidden');
+        el2.classList.add('hidden');
+        el3.classList.add('hidden');
+        el4.classList.add('hidden');
+        idx++;
+        if (idx===1){ el1.classList.remove('hidden'); }
+        else if (idx===2){ el2.classList.remove('hidden'); }
+        else if (idx===3){ el3.classList.remove('hidden'); }
+        else if (idx===4){ el4.classList.remove('hidden'); idx=0; }
+    }
+</script>
+</html>
