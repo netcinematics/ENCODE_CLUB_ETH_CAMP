@@ -1,4 +1,4 @@
-/* Create IPFS behaviors with NFT.STORAGE
+# Create IPFS behaviors with NFT.STORAGE
 
 login with github account
 
@@ -101,4 +101,7 @@ looking for tokenURI, never seen how that works..
   IPFS: ipfs://bafybeic66bfn42pik2y6puchu3f3cwxitaj2tuwllkkppao4m7ei2ht7z4
   Gateway: https://nftstorage.link/ipfs/bafybeic66bfn42pik2y6puchu3f3cwxitaj2tuwllkkppao4m7ei2ht7z4
 
-*/
+  NFTCLICK: 
+  (HTML NEXT TEST)
+  bafybeih4mlfmnyulv72bplkmmeregtidmrz32u6ercb72jpuqhxkztpcg4
+https://nftstorage.link/ipfs/bafybeih4mlfmnyulv72bplkmmeregtidmrz32u6ercb72jpuqhxkztpcg4
