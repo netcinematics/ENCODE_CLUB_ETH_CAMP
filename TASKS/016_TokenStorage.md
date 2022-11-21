@@ -95,6 +95,8 @@ looking for tokenURI, never seen how that works..
 
   IMAGES ONLY:
   ipfs://bafybeigmwudzobi2aycjxdg3dgddppsfo35cososzhivskfphho5ul7k6m
+  Gateway: https://nftstorage.link/ipfs/bafybeigmwudzobi2aycjxdg3dgddppsfo35cososzhivskfphho5ul7k6m/1.png
+
 
   DATA ONLY:
   CID: bafybeic66bfn42pik2y6puchu3f3cwxitaj2tuwllkkppao4m7ei2ht7z4
@@ -105,3 +107,22 @@ looking for tokenURI, never seen how that works..
   (HTML NEXT TEST)
   bafybeih4mlfmnyulv72bplkmmeregtidmrz32u6ercb72jpuqhxkztpcg4
 https://nftstorage.link/ipfs/bafybeih4mlfmnyulv72bplkmmeregtidmrz32u6ercb72jpuqhxkztpcg4
+
+
+## How to SEE MINTED NFT?
+
+https://testnets.opensea.io/assets/0x679c5f9adC630663a6e63Fa27153B215fe021b34/0
+ https://testnets.opensea.io/ and click the user icon where is next to the wallet icon then select profile.
+ https://testnets.opensea.io/assets/dungeonsanddragonscharacter-v9
+
+MINTED EPIC NFT:
+DEPLOYED CONTRACT on Goerli: 0x759720E234DBeE264b8F37543AD03bedDd475d5a
+https://testnets.opensea.io/assets/goerli/0x759720e234dbee264b8f37543ad03beddd475d5a/0
+Second Mint - appeared much later:
+https://testnets.opensea.io/assets/goerli/0x759720e234dbee264b8f37543ad03beddd475d5a/1
+
+It is possible to connect wallet and then look at COLLECTIONS.
+Or to take the deployed contract hash and create the URL above. 
+
+AVATARZ DATA:
+https://nftstorage.link/ipfs/bafybeiea7ads7ihnrxxbnrmgrnhhkr2ct5ypdrcxprtgyrvj4qtsvstihu

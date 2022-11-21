@@ -1,0 +1,64 @@
+{
+    "identity": "1:01.2:02.3:03.4:001",
+    "dnftz": 1,
+    "print_date": "2022-14-20T08:44:47.929Z",
+    "name": "ClickableToken1",
+    "description": "Interactive Token, Clickable NFT, POC. \n NFT Collectible by spazeFalcon. All Rights Reserved 2022.",
+    "image": "ipfs://bafybeigmwudzobi2aycjxdg3dgddppsfo35cososzhivskfphho5ul7k6m/1.png",
+    "animation_url": "https://nftstorage.link/ipfs/bafybeiavy23vyq3qs5fqdrxdllzatv6hhoqjuu42ic6qf4hiog4elawote/",
+    "external_url": "https://audius.co/spazefalcon",
+    "firstLast": 1,
+    "attributes": [
+      {
+        "trait_type": "sky",
+        "value": "StarsAndMoon"
+      },
+      {
+        "trait_type": "background",
+        "value": "SpazeFactory"
+      },
+      {
+        "trait_type": "DNFTZ",
+        "value": "Interactive Token 1"
+      },
+      {
+        "trait_type": "NAME",
+        "value": "SPAZEFALCON"
+      },
+      {
+        "display_type": "boost_number",
+        "trait_type": "Test 1",
+        "value": 80
+      },
+      {
+        "display_type": "boost_percentage",
+        "trait_type": "Clickable",
+        "value": 77
+      },
+      {
+        "trait_type": "frame_color",
+        "value": "gold"
+      },
+      {
+        "trait_type": "STATUS",
+        "value": "RARE",
+        "display_type": "boost_percentage"
+      },
+      {
+        "trait_type": "GOLD",
+        "value": "GOLD-CARD",
+        "display_type": "boost_percentage"
+      },
+      {
+        "display_type": "boost_number",
+        "trait_type": "RARE-GRADE",
+        "value": "0.93"
+      },
+      {
+        "display_type": "boost_percentage",
+        "trait_type": "RARE-RATIO",
+        "value": 0.07
+      }
+    ],
+    "signature_date": "2022-14-13T09:01:01.444Z"
+  }
