@@ -11,7 +11,7 @@ A CAR is a Content Addressed Archive that allows you to pre-compute the root CID
 NOTES on how to build a 721 NFT CONTRACT!
 
 Starting with 4 examples:
-1) KryptoBitz set002 - currently in production on OpenSea
+1) KryptoBitz set002
 2) MyEpicNFT - example 1 from encode
 3) Minty - example 2 from encode
 4) "INTERACTIVE NFT" - code from: 
