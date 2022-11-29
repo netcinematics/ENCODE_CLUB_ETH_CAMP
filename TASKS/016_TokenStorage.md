@@ -9,6 +9,7 @@ A CAR is a Content Addressed Archive that allows you to pre-compute the root CID
 
 
 NOTES on how to build a 721 NFT CONTRACT!
+Do NOT use these contracts in production!
 
 Starting with 4 examples:
 1) KryptoBitz set002
