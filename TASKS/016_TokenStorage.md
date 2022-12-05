@@ -111,7 +111,11 @@ https://nftstorage.link/ipfs/bafybeih4mlfmnyulv72bplkmmeregtidmrz32u6ercb72jpuqh
 
 
 ## How to SEE MINTED NFT?
-
+https://testnets.opensea.io/assets/goerli/0xE3D083aE3C23E644E34c424cA892FFE94e312c90/3 //working
+https://nftstorage.link/ipfs/bafybeiffqgslzarimnslbctkbnxdaffy7djrorvqic7bbdvrpspnqnxu4q/1.json
+https://nftstorage.link/ipfs/bafybeiffqgslzarimnslbctkbnxdaffy7djrorvqic7bbdvrpspnqnxu4q/2.json
+https://testnets.opensea.io/assets/goerli/0x00744a333edf42489157f3f1f562e3e014936aed/2  //working
+https://testnets.opensea.io/assets/goerli/0xF5A7a4E3211B86c5b06cC1949b66AB4F2d9A34CA/1
 https://testnets.opensea.io/assets/0x679c5f9adC630663a6e63Fa27153B215fe021b34/0
  https://testnets.opensea.io/ and click the user icon where is next to the wallet icon then select profile.
  https://testnets.opensea.io/assets/dungeonsanddragonscharacter-v9
