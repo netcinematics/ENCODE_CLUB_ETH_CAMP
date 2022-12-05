@@ -1,5 +1,7 @@
 /* TEAM 10 Proposal Project : 
 
+SETUP: paste code into Remix...
+
 NAME: "MINT your VOTE!" - RANDOM~ELECTIONZ (RECZ) 
 
 DESCRIPTION:
@@ -10,26 +12,31 @@ DESCRIPTION:
 
 2) ELECTION RESULTS counted - at DEADLINE (endElection).
 
-3) Historic, NFT MINT of ELECTION RESULTS, pizza or beer - into Wallet of VOTERS. 
+3) NFT MINT of ELECTION RESULTS (pizza or beer|pirate or ninja) into VOTER Wallet! 
 
-4) (Pseudo-Anonymous) Random Elections
+4) (Pseudo-Anonymous) Random Elections.
 
 
 KEY PRINCIPLES:
 
-- minimalistic boilerplate (MVP) - Dramatically Simplified Voting System (DSVS)
+- minimalistic boilerplate (MVP) - Minimal Simplified Voting System (MSVS)
 
-- extensible, modular "stubs", to EXTEND implementation, with Strategy (later).
+- extensible, modular "stubs", EXTEND implementation, with Strategy (described below).
 
-- anonymous, wallet address has the VOTE, for the wallet. [Triangle of trust (below)]
+- anonymous, wallet address VOTES. [Triangle of trust (below)]
 
 - MINT your VOTE! - NFTs minted(burned) - representing VOTE.
 
-POTENTIAL-EXAMPLES:
+
+Something that could be added later...
+DYNAMIC - ELECTION - EXAMPLES:
+
+- Random~Elections: Pirate or Ninja?
 
 - Random Election: Do Unicorns|Yeti|Aliens Exist?
 
 - Random~Elections: | By Zipcode: Peanut Butter or Jelly?
+
 
 DESCRIPTION:
 
@@ -43,15 +50,22 @@ DESCRIPTION:
     2) stop election
 
 
-- GOAL: MINT the VOTE, of the team, - for your preference.
+- WORKING: MINT the VOTE, to wallet, - of your preference.
 
-- GOAL: NFT reciept of participation - MINT RESULTS of Election.
+- TODO: Unit Tests
 
-- What's YOUR VOTE - Pizza or Beer?
+- TODO: Start stop Election. 
 
-- Peanut Butter or Jelly?
+- TODO: MINT RESULTS of Election.
 
-Complexity "STUBS" :
+- TODO: UI - What's YOUR VOTE - Pizza or Beer?
+
+- TODO: NFT reciept of participation (I voted sticker)
+
+
+Complexity "STUBS" : 
+
+- Things simplified - to get to MVP - can extend later:
 
 Identity Validation - simplified to ZIPCODE and WALLET ADDRESS
 
@@ -77,46 +91,42 @@ UNLIMITED VOTING - simplified by overwrite vote, change your vote - up until end
 
 CUMULATIVE NFT MINTING - no need to BURN previouse votes - simplified.
 
-
 //END SIMPLIFICATION STUBS.
 
-TRIANGLE-OF-TRUST (simplified - anonymous voting)
 
-1) VOTER from ZIPCODE, moved to COLORADO, gets WALLET address
+
+TRIANGLE-OF-TRUST (simplified - anonymous voting) 
+
+- This is one way anonymous voting could work...(with zkProof)
+
+1) VOTER from ZIPCODE, moved to COLORADO, gets WALLET address from COLORADO.
 
 2) COLORADO has ELECTION, for ZIPCODE, Wallet Notified.
 
 3) VOTER uses Wallet to cast VOTE in ELECTION.
 
-- anonymous, only COLORADO knows the owner of address (zkProof).
+- all voted visible on blockchain, but anonymous, 
+- if only COLORADO knows the owner of address 
+- Name, Address, Identity - hidden by (zkProof).
 
-5) ELECTION CHECKS with COLORADO - wallet address in ZIPCODE? valid?
-
-6) ELECTION completed with valid votes - and is anonymous.
+5) ELECTION VALIDATES with COLORADO - wallet address in ZIPCODE? valid?
 
 
 
 KEY-INTERACTIONS (use-cases):
 
-1 - VOTER attaches Web3 Wallet to website on GitHub.
+1 - VOTER attaches Web3 Wallet to website on GitHub. WALLET ADDRESS(required).
 
-2 - VOTER enters PIZZA or BEER, clicks VOTE. ZIPCODE(optional), WALLET ADDRESS(required).
+2 - VOTER sees PIZZA or BEER buttons, chooses, and clicks VOTE. 
 
-3 - VOTER receives Digital NFT VOTE Sticker. "I voted".
+3 - VOTER receives Digital NFT VOTE.
 
-4 - VOTE goes to ELECTION-CONTRACT: wallet and zipcode.
-
-5 - ELECTION CONTRACT, RUNS ELECTION - Pizza or Beer - up until (DEADLINE) endElection().
+4 - ELECTION CONTRACT, RUNS ELECTION - Pizza or Beer - up until endElection().
 
 6 - At endElection(), votes tabulated, RESULTS NFT MINTED, and sent to VOTER Wallets.
 
 
-ENTITY: 
-
-NAME: RANDOM~ELECTIONS
-
-DESIGN: 
-
+----------------
 a) MINIMAL ADMIN
 
 startElection(); //if election is not running, start accepting votes.
@@ -129,15 +139,11 @@ b) MINIMAL VOTER UI
 
 wallet, CHOICE. Submit.
 
-
------------
-c) VOTING STICKER NFT
-
-castVote(); //if election running, and zipcode, and hasnt voted yet. log vote.
-
 mint NFT to wallet.
 
-d) VOTING RESULTS
+-----------
+
+c) VOTING RESULTS
 
 endElection(); tabulate votes and mint NFT VOTE RESULTS to all voters.
 
@@ -146,8 +152,7 @@ endElection(); tabulate votes and mint NFT VOTE RESULTS to all voters.
 
 */
 
-// PIZZAorBEER - absolute minimum voting system.
-// MINT YOUR VOTE - PIZZAorBEER.
+// PIZZAorBEER - absolute minimum voting system. ~ MINT YOUR VOTE 
 
 // 1) wallet address connects to Web3, 
 // 2) VOTER selects PIZZA or BEER, 
@@ -158,7 +163,6 @@ endElection(); tabulate votes and mint NFT VOTE RESULTS to all voters.
 //https://www.svgrepo.com/svg/90628/pizza
 //https://www.svgrepo.com/svg/30475/beer
 //https://www.svgrepo.com/svg/7938/vote
-//illustration/concept by spazefalcon 2022
 //OpenZeppelin721: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol
 //OpenZeppelinEnumerable: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721Enumerable.sol
 //OpenZeppelinStorage: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/extensions/ERC721URIStorage.sol
@@ -171,7 +175,7 @@ import "@openzeppelin/contracts/access/Ownable.sol"; //TODO: needed?
 import "@openzeppelin/contracts/utils/Base64.sol"; //Used for CASTVOTE NFT creation.
 import "hardhat/console.sol";
 /// @custom:security-contact netcinematics@protonmail.com
-contract Random_Vote is ERC721Enumerable, Ownable { //for totalSupply
+contract Random_Election is ERC721Enumerable, Ownable { //for totalSupply
 // contract Random_Vote is ERC721, Ownable {
     using Strings for uint256;
     using Strings for uint8;
@@ -181,43 +185,28 @@ contract Random_Vote is ERC721Enumerable, Ownable { //for totalSupply
     /// @dev See: Storage
     mapping(uint256 => string) private _tokenURIs; // Optional mapping for token URIs
     /// @dev See: Enumerable
-    // Array with all token ids, used for enumeration
-    // uint256[] public _allVoteTokens;  //TODO make this private
-    // mapping(uint256 => uint256) public _allVoteTokensIndex;   // Mapping from token id to position in the allTokens array
     uint256 public maxVoteSupply = 100;
     string public baseURI;
     bool public paused = false;
 
   constructor(string memory _name, string memory _symbol
   ) ERC721(_name, _symbol) {
-    //console.log("CONSTRUCTOR-TIME");
-    // _name = "1Random~Electionz";
-    // _symbol = "2PIZZAorBEER";
     //SET FROM NFT.STORAGE:
     baseURI = "https://nftstorage.link/ipfs/bafybeiffqgslzarimnslbctkbnxdaffy7djrorvqic7bbdvrpspnqnxu4q/";
-    //https://nftstorage.link/ipfs/bafybeiffqgslzarimnslbctkbnxdaffy7djrorvqic7bbdvrpspnqnxu4q/1.json
-    // setBaseURI("https://nftstorage.link/ipfs/bafybeiffqgslzarimnslbctkbnxdaffy7djrorvqic7bbdvrpspnqnxu4q/");
-    // setBaseURI("ipfs://QmPgP5z1Mu9BeWcCr5jaFoCLCFqFoxXTxKM2GrUhUd8cAx/"); //broke.
-    // autoBatchMint(maxSupply);
     autoBatchMint();
   }
 
   function autoBatchMint() private {
-    console.log("AUTOBATCH");
     uint256 supply = totalSupply(); //See {IERC721Enumerable-totalSupply}.
-    console.log(supply);
     require(!paused);
     uint256 _mintAmount = 3;
     require(_mintAmount > 0);
-    // require(_mintAmount <= maxVoteSupply);
-    // require(_mintAmount <= maxMintAmount);
     require(supply + _mintAmount <= maxVoteSupply); //less than maximum votes allowed.
     if (msg.sender != owner()) {
       //IF NOT OWNER value greater than cost by mintAmount
     //   require(msg.value >= cost * _mintAmount);
     } else {
-        console.log('minting');
-        //AUTOMATIC BATCH MINT
+        //AUTOMATIC BATCH MINT - for OPENSEA NFT TEST.
         for (uint8 i = 1; i <= _mintAmount; i++) {
             console.log(supply+ i);
             _safeMint(msg.sender, supply + i);
@@ -228,100 +217,34 @@ contract Random_Vote is ERC721Enumerable, Ownable { //for totalSupply
 
   function setVoteTokenURI(uint256 tokenId, uint8 vote) public returns (string memory){
     require(_exists(tokenId),"ERC721Metadata: URI query for nonexistent token");
-    // string memory currentBaseURI = _baseURI();
-    //IF BASEURI then CONCATENATE else "" - return STRING.
-    // require(baseURI,"no base.");
-    console.log('build Vote URI');
-    console.log(vote);
     string memory voteURL = "";
-    // if(bytes(baseURI)){
-        // if(vote == 1){
-            console.log(tokenId.toString());
-            walletVotes[msg.sender] = vote;  //overwritten, 1,2,3!
-            // voteURL = string(abi.encodePacked(baseURI, vote, ".json"));
-            // voteURL = string(abi.encodePacked(baseURI, "2", ".json")); //worked?  
-            //TODO: add token COUNTER?.
-            voteURL = string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));  
-            //MINT NFT "I Voted Sticker"
-            // _safeMint(msg.sender, tokenId);
-            // console.log(totalSupply()+1);
-            //params: tokenID, URI
-            _setTokenURI(tokenId,voteURL);
-
-        // }
-        
-    // }
-    console.log(voteURL);
-    // return bytes(baseURI).length > 0 //IF BASE URI, then pack
-    //     ? string(abi.encodePacked(currentBaseURI, tokenId.toString(), ".json"))
-    //     : "";
+    walletVotes[msg.sender] = vote;  //overwritten, 1,2,3!
+    //TODO: add token COUNTER?.
+    voteURL = string(abi.encodePacked(baseURI, tokenId.toString(), ".json"));  
+    _setTokenURI(tokenId,voteURL);
     return voteURL;
   }
 
   /// @dev - require Storage to setTokenURI (very bottom).
   function castVote( uint8 vote ) public {
-      //Check msg.sender
-            console.log("cast vote");
-          string memory voteURL = "";
-    //   require(msg.sender,"bad sender");
-      //Check vote is either 1 or 2.
-    //   if(!_exists(voterAddr)){
-        //  votes[voterAddr] = vote;
-    //   } else {
-        walletVotes[msg.sender] = vote;
-    //   }
-        string memory voteStr = "1"; //STUB
-        voteURL = string(abi.encodePacked(baseURI, voteStr, ".json")); 
+   string memory voteURL = "";
+   walletVotes[msg.sender] = vote;
+   string memory voteStr = "1"; //STUB
+   voteURL = string(abi.encodePacked(baseURI, voteStr, ".json")); 
+   _safeMint(msg.sender, totalSupply()+1);
+   _setTokenURI(totalSupply(),voteURL);
+}
 
-        // if(voteStr == string(1)){
-            // console.log(tokenId.toString());
-            // votes[msg.sender] = vote;
-              
-        // }
-
-    //   require(vote == 1 || vote == 2, "invalid vote");
-      //Check msg.sender didn't already vote
-      //Add msg.sender to vote role with vote number.
-      
-      //MINT NFT "I Voted Sticker"
-      _safeMint(msg.sender, totalSupply()+1);
-      // console.log(totalSupply()+1);
-      //params: tokenID, URI
-      _setTokenURI(totalSupply(),voteURL);
-  }
-
-  // function castVOTENFT(uint256 tokenId, uint8 vote) public returns (string memory) {
-  function castNFTVote(address to, uint8 vote, uint256 tokenId) public returns (string memory) {
-       //TEST PARAMS: (0x46f, 2, 4|5|6)
-        // if (!_exists(tokenId)) revert URIQueryForNonexistentToken();
-       // if(vote not 1,2,3) revert //TODO
-      //---------------------------
-      //PREPARE THE VOTE...MINT.
+function castNFTVote(address to, uint8 vote, uint256 tokenId) public returns (string memory) {
       string memory voteURL = "";
-      // walletVotes[msg.sender] = 2;  //vote; //STUB (below also)
       walletVotes[to] = 2;  //vote; //STUB (below also)
       string memory voteStr = "1"; //STUB
       voteURL = string(abi.encodePacked(baseURI, voteStr, ".json")); 
-      //------------------------------------
-
-
-
       // JSON - Encode Base64 - metadata-----------
       string memory json = Base64.encode(
           bytes(
               string(
                   abi.encodePacked(
-
-                        // '{"name": "',
-                        // string(
-                        //     abi.encodePacked(
-                        //         "Placeholder NFT (ERC721A) #",
-                        //         Strings.toString(tokenId)
-                        //     )
-                        // ),
-                        // '", "description": "ion.", "image": "data:image/svg+xml;base64,PHNOTYg=="}'
-  
-
                       '{"name": "',
                       string( abi.encodePacked( "vote", Strings.toString(tokenId) )),
                       '", "description": "descripto...", "image": "ipfs://bafybeicymzff6xcetv7egchzx4j5l5h5yuoso33ydruflixq6kdodqj2b4/2.jpg"}'
@@ -330,130 +253,26 @@ contract Random_Vote is ERC721Enumerable, Ownable { //for totalSupply
           )
       );
       // JSON - end encode-------------------------
-
       string memory finalJSONTokenUri = string( // Prefix: data:application/json;base64
           abi.encodePacked("data:application/json;base64,", json)
       );
-
       // MINT vote--------------------------------
-      console.log("minting to");
-      // console.log(msg.sender);
-      console.log(to);
-      
-      console.log(totalSupply()+1);
-      //params: tokenID, URI
       _safeMint(msg.sender, totalSupply()+1);
       _setTokenURI(totalSupply(),finalJSONTokenUri); //This is not URL, but json obj. Saved in _tokenURIs[];
       //LATER this JSON is retrieved with _tokenURIs[tokenId]; No actual IPFS url!
       //END MINT vote-----------------------------
       return "Vote Minted!";
-
   }
 
   function castVOTESVG() public view { //todo remove
     console.log("Minting...");
-    // uint256 newItemId = _tokenIds.current(); //TODO.
-
-    // string memory first = pickRandomFirstWord(newItemId);
-    // string memory second = pickRandomSecondWord(newItemId);
-    // string memory third = pickRandomThirdWord(newItemId);
-    // string memory combinedWord = string(abi.encodePacked(first, second, third));
-    // console.log(combinedWord);
-    // string memory finalSvg = string(abi.encodePacked(baseSvg, combinedWord, "</text></svg>"));
-
-    // Get all the JSON metadata in place and base64 encode it.
     string memory json = ""; //Base64.encode(
-      //   bytes(
-      //         string(
-      //             abi.encodePacked(
-      //                 '{"name": "',
-      //                 // We set the title of our NFT as the generated word.
-      //                 combinedWord,
-      //                 '", "description": "A highly acclaimed collection of squares.", "image": "data:image/svg+xml;base64,',
-      //                 // We add data:image/svg+xml;base64 and then append our base64 encode our svg.
-      //                 Base64.encode(bytes(finalSvg)),
-      //                 '"}'
-      //             )
-      //         )
-      //     )
-      // );
-
-      // Just like before, we prepend data:application/json;base64, to our data.
-      string memory finalTokenUri = string(
-          abi.encodePacked("data:application/json;base64,", json)
-      );
-
-      console.log("\n-----FinalURI---------------");
-      console.log(finalTokenUri);
-      console.log("--------------------\n");
-
-      // _safeMint(msg.sender, newItemId);
-      
-      // // Update your URI!!!
-      // _setTokenURI(newItemId, finalTokenUri);
-    
-      // _tokenIds.increment();
-      // console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
+    string memory finalTokenUri = string(
+        abi.encodePacked("data:application/json;base64,", json)
+    );
   }
 
-  /// - SVG NFT
-// function tokenURI(uint256 tokenId) public view override returns (string memory) {
-//     _requireMinted(tokenId);
-
-    // Point[] memory points = new Point[](NUM_POLYS * NUM_POINTS_PER_POLY);
-
-    // (uint256 randX, uint256 randY) = multiply(tokenId, 888, 777);
-
-    // for (uint256 i = 1; i <= NUM_POLYS * 3; i++) {
-    //   (uint256 pX, uint256 pY) = multiply(randX, randY, i);
-    //   points[i - 1] = Point({ x: pX, y: pY });
-    // }
-
-    // string memory allPolys = "";
-    // for (uint256 i = 0; i < NUM_POLYS; i++) {
-    //   string memory coordinates = "";
-    //   for (uint256 j = 0; j < NUM_POINTS_PER_POLY; j++) {
-    //     coordinates = string(abi.encodePacked(coordinates, Strings.toString(points[i * NUM_POINTS_PER_POLY + j].x), ',', Strings.toString(points[i * NUM_POINTS_PER_POLY + j].y), ','));
-    //   }
-    //   allPolys = string(abi.encodePacked(allPolys, "<polygon points='", coordinates, "' fill='hsla(", Strings.toString(points[i * NUM_POINTS_PER_POLY].x % 59), ",100%,", Strings.toString((points[i * NUM_POINTS_PER_POLY].x % 20) + 50), "%,0.5)' stroke='none' />"));
-    // }
-
-    // string memory svgImage = string(
-    //   abi.encodePacked(
-    //     '<?xml version="1.0" encoding="UTF-8"?>',
-    //     '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350px" height="350px" viewBox="0 0 997 997" style="background-color:#fff">',
-    //       allPolys,
-    //     '</svg>'
-    //   )
-    // );
-
-    // string memory base64Image = Base64.encode(bytes(svgImage));
-
-    // https://github.com/karooolis/placeholder-nft/blob/main/contracts/contracts/PlaceholderNFTERC721.sol
-    // string memory metadata = Base64.encode(
-    //   bytes(
-    //     string(
-    //       abi.encodePacked(
-    //         '{"name": "',
-    //         string(
-    //             abi.encodePacked(
-    //                 "Volcano NFT #",
-    //                 Strings.toString(tokenId)
-    //             )
-    //         ),
-    //         '", "attributes": [], "description": "Volcano NFTs are randomly generated images of an erupting volcano!", "image": "data:image/svg+xml;base64,', base64Image, '"}'
-    //       )
-    //     )
-    //   )
-    // );
-
-    // return string(abi.encodePacked("data:application/json;base64,", metadata));
-  // }
-
-
-
   /// BELOVED - TOKENURI ----------------------------------------
-
   function _getTokenURI(uint256 tokenId) public view returns (string memory) {
     return _tokenURIs[tokenId]; //use this to TEST URL and JSON STORAGE.
   }
@@ -467,45 +286,10 @@ contract Random_Vote is ERC721Enumerable, Ownable { //for totalSupply
   //RETURN CONCANTENATED URL to JSON. Where is tokenURI called?
   function tokenURI(uint256 tokenId) public view override returns (string memory){
     require(_exists(tokenId),"ERC721Metadata: URI query for nonexistent token");
-    // string memory currentBaseURI = _baseURI();
-    //IF BASEURI then CONCATENATE else "" - return STRING.
-    // console.log('tokenuri');
-    // console.log(string(abi.encodePacked(baseURI, tokenId.toString(), ".json")));
-  // if(tokenId==4){
-    //LOOK UP JSON METADATA from base64? _tokenURIs[tokenId]; testURILookUp
         _requireMinted(tokenId);
-
         //TEST 1: rely on _tokenURIs mapping.
         string memory _tokenURI = _tokenURIs[tokenId];
-        // string memory base = _baseURI();
-        console.log("token4");
-        console.log(_tokenURI);
        return _tokenURI;
-
-       //TEST 2: ask the super class?
-       // return super.tokenURI(tokenId);
-
-
-        // If there is no base URI, return the token URI.
-        // if (bytes(base).length == 0) {
-        //     return _tokenURI;
-        // }
-        // If both are set, concatenate the baseURI and tokenURI (via abi.encodePacked).
-        // if (bytes(_tokenURI).length > 0) {
-        //     return string(abi.encodePacked(base, _tokenURI));
-        // }
-
-        // return super.tokenURI(tokenId);
-
-      // } else {
-      //     return bytes(baseURI).length > 0
-      //       ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json"))
-      //       : "";
-      // }
-    //TODO need to look up URI set in votes[addr] = 0|1|2 //tokenId.toString()
-    // return bytes(baseURI).length > 0
-    //     ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json"))
-    //     : "";
   }
  /// END BELOVED - TOKENURI---------------------------------------
 
@@ -521,14 +305,6 @@ contract Random_Vote is ERC721Enumerable, Ownable { //for totalSupply
       //TABULATE ELECTION RESULTS
       //MINT NFT to all VOTERS.
   }
-
-
-//   function setCost(uint256 _newCost) public onlyOwner {
-//     cost = _newCost;
-//   }
-//   function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
-//     maxMintAmount = _newmaxMintAmount;
-//   }
 
   function pause(bool _state) public onlyOwner {
     paused = _state;
