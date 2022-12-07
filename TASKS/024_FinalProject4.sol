@@ -77,15 +77,23 @@ CUMULATIVE NFT MINTING - no need to BURN previouse votes - simplified.
 
 TRIANGLE-OF-TRUST (simplified - anonymous voting)
 
-1) VOTER from ZIPCODE, moved to COLORADO, gets WALLET address from COLORADO.
+1) VOTER from ZIPCODE, moved to COLORADO, gets WALLET address from COLORADO which is bound to the tracker digital identity,
+  https://mycolorado.gov/colorado-digital-id.  More than one oracle is used to query the Colorado digital identity API.
+  Each oracle node operator is sent an amount of LINK token to incentivize the integral reporting of the digital identity.
+  This digital identity is stored on IPFS as W3C verifiable credential,
+  https://www.w3.org/TR/vc-use-cases/.  Some biometric data, also stored as a W3C verifiable credential,
+  and is paired with the digital identity.  The credentials of interest for this project are protected using zero knowledge proofs.
 
-2) COLORADO has ELECTION, for ZIPCODE, Wallet Notified.
 
-3) VOTER uses Wallet to cast VOTE in ELECTION.
+2) COLORADO has ELECTION, for ZIPCODE, Wallet Notified. An NFT/W3C verifiable credential, representing the ballot is sent to the wallet.
 
-- anonymous, only COLORADO knows the owner of address (zkProof).
+3) VOTER uses Wallet to cast VOTE in ELECTION.  The voting website requires connecting to the site using the wallet, much like DeFi sites require
+the user to use Metamask or some other wallet to connect and interact.  The ballot is filled out on the site, and signed using the wallet's
+private key.  The ballot is stored on IPFS and protected using zkProof.
 
-5) ELECTION CHECKS with COLORADO - wallet address valid?
+5) ELECTION CHECKS with COLORADO - wallet address valid?  The wallet address is verified against a list of known colorado addresses in a registry
+contract. The state of Colorado owns the ZKProof verifier kit for the ballots and verifies them.  An open sourced dApp is used to tally the
+votes.
 
 
 DESIGN: 
